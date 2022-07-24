@@ -3,7 +3,7 @@
     <div class="h-full flex justify-center items-center">
       <div class="grid grid-cols-12 gap-x-4">
         <div class="hidden md:block col-start-2 col-span-5">
-          <img class="w-full" src="../assets/images/left.png" alt="Hero">
+          <img class="max-w-full" src="../assets/images/left.png" alt="Hero">
         </div>
         <div class="col-span-12 md:col-start-8 md:col-span-4">
           <form @submit.prevent="" class="h-full flex flex-col justify-center text-[#333]">
@@ -21,7 +21,7 @@
             </div>
             <input class="block cursor-pointer rounded-[10px] text-white hover:text-gray-300 bg-[#333] py-3 px-12 | mx-auto mb-6" type="submit" value="登入">
             <div class="text-center">
-              <a class="" href="#">註冊帳號</a>
+              <router-link class="" to="/register">註冊帳號</router-link>
             </div>
           </form>
         </div>
