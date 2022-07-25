@@ -37,6 +37,7 @@ export default defineStore('todoStore', {
     async addTodo() {
       try {
         await request('/todos', 'post', { content: this.content })
+        this.content = ''
         successAlert('新增成功！')
         this.getTodos()
       } catch (error) {
