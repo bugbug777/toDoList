@@ -7,11 +7,9 @@ const content = ref('')
 
 const addTodo = async () => {
   try {
-    const res = await request('/todos', 'post', { content: content.value })
-    console.log(res)
+    await request('/todos', 'post', { content: content.value })
     successAlert('新增成功！')
   } catch (error) {
-    console.dir(error);
     errorAlert('新增失敗')
   }
 }
