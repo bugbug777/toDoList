@@ -3,6 +3,10 @@
 # abort on errors
 set -e
 
+# if dist exists
+if [ -d "./dist" ]; then
+  rm -rf ./dist
+fi
 # build
 npm run build
 
