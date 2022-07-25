@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import request from '../utils/axios'
 import { errorAlert } from '../utils/sweetalert';
 
@@ -16,11 +16,14 @@ const getTodos = async () => {
     const res = await request('/todos', 'get')
     todos.value = res.data.todos
   } catch (error) {
-    console.log(error)
     errorAlert('不好意思，伺服器剛剛不小心睡著了！')
   }
 }
 onMounted(() => getTodos())
+
+const todoNum = computed(() => {
+  return todos.value.filter(item => item.status === false).length
+})
 
 </script>
 <template>
@@ -46,7 +49,7 @@ onMounted(() => getTodos())
         </li>
       </ul>
       <div class="flex justify-between">
-        <p class="text-[14px]">5 個待完成項目</p>
+        <p class="text-[14px]">{{ todoNum }} 個待完成項目</p>
         <a @click.prevent="" class="text-[14px] text-[#9F9A91]" href="#">清除已完成項目</a>
       </div>
     </div>
