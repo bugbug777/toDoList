@@ -12,7 +12,7 @@ const instance = axios.create({
 // 登入、註冊不需要驗證，所以不加上 token 也不影響
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('token');
     if (token) config.headers.Authorization = `Bearer ${token}`;
 
     return config;
