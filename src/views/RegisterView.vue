@@ -47,29 +47,29 @@ const register = async () => {
               </div>
               <div class="mb-4">
                 <label class="block text-[14px] font-bold mb-1" for="name">您的暱稱</label>
-                <VField name="暱稱" rules="required" v-model="user.name"
+                <VField name="Name" rules="required" v-model="user.name"
                   class="block w-full rounded-[10px] placeholder-shown:text-[#9F9A91] focus-visible:outline-amber-700 py-3 px-4 mb-1"
                   id="name" type="text" placeholder="請輸入您的暱稱" />
-                <ErrorMessage name="暱稱">
-                  <p class="text-sm text-bold text-red-500">{{ errors.暱稱 }}</p>
+                <ErrorMessage name="Name">
+                  <p class="text-sm text-bold text-red-500">{{ errors.Name }}</p>
                 </ErrorMessage>
               </div>
               <div class="mb-4">
                 <label class="block text-[14px] font-bold mb-1" for="password">密碼</label>
-                <VField name="密碼" rules="required|alpha_num|min:8|max:16" v-model="user.password"
+                <VField name="Password" rules="required|alpha_num|min:8|max:16" v-model="user.password"
                   class="block w-full rounded-[10px] placeholder-shown:text-[#9F9A91] focus-visible:outline-amber-700 py-3 px-4 mb-1"
                   id="password" type="password" placeholder="請輸入密碼" />
-                <ErrorMessage name="密碼">
-                  <p class="text-sm text-bold text-red-500">{{ errors.密碼 }}</p>
+                <ErrorMessage name="Password">
+                  <p class="text-sm text-bold text-red-500">{{ errors.Password }}</p>
                 </ErrorMessage>
               </div>
               <div class="mb-6">
                 <label class="block text-[14px] font-bold mb-1" for="confirmPassword">再次輸入密碼</label>
-                <VField name="密碼確認" rules="required" v-model="user.confirmPassword"
+                <VField name="ConfirmPassword" rules="required" v-model="user.confirmPassword"
                   class="block w-full rounded-[10px] placeholder-shown:text-[#9F9A91] focus-visible:outline-amber-700 py-3 px-4 mb-1"
                   id="confirmPassword" type="password" placeholder="請再次輸入密碼" />
-                <ErrorMessage name="密碼確認">
-                  <p class="text-sm text-bold text-red-500">{{ errors.密碼確認 }}</p>
+                <ErrorMessage name="ConfirmPassword">
+                  <p class="text-sm text-bold text-red-500">{{ errors.ConfirmPassword }}</p>
                 </ErrorMessage>
               </div>
               <input
