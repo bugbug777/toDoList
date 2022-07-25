@@ -1,18 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-import request from '../utils/axios'
-import { successAlert, errorAlert } from '../utils/sweetalert'
+import { storeToRefs } from 'pinia'
+import todoStore from '../stores/todo'
 
-const content = ref('')
-
-const addTodo = async () => {
-  try {
-    await request('/todos', 'post', { content: content.value })
-    successAlert('新增成功！')
-  } catch (error) {
-    errorAlert('新增失敗')
-  }
-}
+const todo = todoStore()
+const { content } = storeToRefs(todo)
+const { addTodo } = todo
 </script>
 
 <template>
