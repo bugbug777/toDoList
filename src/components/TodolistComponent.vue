@@ -11,6 +11,9 @@ const updateStatus = (e) => {
 }
 
 const todos = ref([])
+const todoNum = computed(() => {
+  return todos.value.filter(item => item.status === false).length
+})
 const getTodos = async () => {
   try {
     const res = await request('/todos', 'get')
@@ -21,9 +24,6 @@ const getTodos = async () => {
 }
 onMounted(() => getTodos())
 
-const todoNum = computed(() => {
-  return todos.value.filter(item => item.status === false).length
-})
 
 </script>
 <template>
