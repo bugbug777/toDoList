@@ -7,7 +7,7 @@ const tabs = ['全部', '待完成', '已完成']
 
 const todo = todoStore()
 const { status, todos, tempTodos, todoNum } = storeToRefs(todo)
-const { getTodos, editTodoStatus, editTodo, deleteTodo, updateStatus } = todo
+const { getTodos, editTodoStatus, editTodo, deleteTodo, deleteTodos, updateStatus } = todo
 onMounted(() => getTodos())
 </script>
 
@@ -37,7 +37,7 @@ onMounted(() => getTodos())
       </ul>
       <div class="flex justify-between">
         <p class="text-[14px]">{{ todoNum }} 個待完成項目</p>
-        <a @click.prevent="" class="text-[14px] text-[#9F9A91]" href="#">清除已完成項目</a>
+        <a @click.prevent="deleteTodos" class="text-[14px] text-[#9F9A91]" href="#">清除已完成項目</a>
       </div>
     </div>
   </div>

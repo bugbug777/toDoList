@@ -68,6 +68,15 @@ export default defineStore('todoStore', {
       } catch (error) {
         errorAlert('刪除失敗')
       }
+    },
+    async deleteTodos() {
+      try {
+        await request(`/todos?status=true`, 'delete')
+        successAlert('清除所有已完成事項！')
+        this.getTodos()
+      } catch (error) {
+        errorAlert('刪除失敗')
+      }
     }
   }
 });
