@@ -32,11 +32,7 @@ onMounted(() => {
     <div class="container md:py-6 px-8 mx-auto">
       <div class="md:w-[500px] mx-auto">
         <TodoBar class="mb-4" />
-        <Todolist v-if="true" />
-        <div v-else class="text-center pt-11">
-          <p class="mb-4">目前尚無待辦事項</p>
-          <img class="block max-w-full mx-auto" src="../assets/images/empty.png" alt="No Todos">
-        </div>
+        <Todolist />
       </div>
     </div>
   </div>

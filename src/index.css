@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .done {
+    @apply line-through text-[#9F9A91] disabled:bg-white
+  }
+}
