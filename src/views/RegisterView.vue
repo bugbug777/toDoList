@@ -1,3 +1,27 @@
+<script setup>
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import request from '../utils/axios'
+
+const router = useRouter()
+const user = reactive({
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: ""
+})
+
+const register = async () => {
+  try {
+    const res = await request('/users/sign_up', 'post', user)
+    localStorage.setItem('token', res.data.token)
+    router.push('/')
+  } catch (error) {
+    console.log(error)
+  }
+}
+</script>
+
 <template>
   <div class="bg-[#FFD370]">
     <div class="container h-screen mx-auto">
@@ -7,30 +31,30 @@
             <img class="block max-w-full" src="../assets/images/left.png" alt="Hero">
           </div>
           <div class="col-span-12 md:col-start-8 md:col-span-4">
-            <form @submit.prevent="" class="h-full flex flex-col justify-center text-[#333]">
+            <form @submit.prevent="register" class="h-full flex flex-col justify-center text-[#333]">
               <img class="block sm:hidden mb-4" src="../assets/images/logo_lg.png" alt="Logo">
               <h1 class="text-center md:text-left font-bold text-2xl mb-8 md:mb-6">註冊帳號</h1>
               <div class="mb-4">
                 <label class="block text-[14px] font-bold mb-1" for="email">Email</label>
-                <input
+                <input v-model="user.email"
                   class="block w-full rounded-[10px] placeholder-shown:text-[#9F9A91] focus-visible:outline-amber-700 py-3 px-4"
                   id="email" type="text" placeholder="請輸入Email">
               </div>
               <div class="mb-4">
                 <label class="block text-[14px] font-bold mb-1" for="name">您的暱稱</label>
-                <input
+                <input v-model="user.name"
                   class="block w-full rounded-[10px] placeholder-shown:text-[#9F9A91] focus-visible:outline-amber-700 py-3 px-4"
                   id="name" type="text" placeholder="請輸入您的暱稱">
               </div>
               <div class="mb-4">
                 <label class="block text-[14px] font-bold mb-1" for="password">密碼</label>
-                <input
+                <input v-model="user.password"
                   class="block w-full rounded-[10px] placeholder-shown:text-[#9F9A91] focus-visible:outline-amber-700 py-3 px-4"
                   id="password" type="password" placeholder="請輸入密碼">
               </div>
               <div class="mb-6">
                 <label class="block text-[14px] font-bold mb-1" for="confirmPassword">再次輸入密碼</label>
-                <input
+                <input v-model="user.confirmPassword"
                   class="block w-full rounded-[10px] placeholder-shown:text-[#9F9A91] focus-visible:outline-amber-700 py-3 px-4"
                   id="confirmPassword" type="password" placeholder="請再次輸入密碼">
               </div>
