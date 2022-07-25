@@ -1,13 +1,26 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import request from '../utils/axios'
+import { errorAlert } from '../utils/sweetalert';
 
 const tabs = ['全部', '待完成', '已完成']
 const status = ref('全部')
 const active = ['text-[#333]', 'border-b-2', 'border-[#333]']
-
 const updateStatus = (e) => {
   status.value = e.target.textContent
 }
+
+const todos = ref([])
+const getTodos = async () => {
+  try {
+    const res = await request('/todos', 'get')
+    todos.value = res.data.todos
+  } catch (error) {
+    console.log(error)
+    errorAlert('不好意思，伺服器剛剛不小心睡著了！')
+  }
+}
+onMounted(() => getTodos())
 
 </script>
 <template>
@@ -19,57 +32,13 @@ const updateStatus = (e) => {
           class="block text-center font-bold text-[14px] py-4" href="#">{{ tab }}</a>
       </li>
     </ul>
+    <!-- Todos -->
     <div class="p-6">
       <ul class="mb-4">
-        <li class="border-b border-[#E5E5E5] pb-[15px] mb-4">
+        <li v-for="(todo, index) in todos" :key="todo._id" class="border-b border-[#E5E5E5] pb-[15px] mb-4">
           <div class="flex">
-            <input class="mr-4" type="checkbox" name="todo1" id="todo1">
-            <label class="grow" for="todo1">把冰箱發霉的檸檬拿去丟</label>
-            <button type="button">
-              <font-awesome-icon icon="fa-solid fa-xmark" fixed-width />
-            </button>
-          </div>
-        </li>
-        <li class="border-b border-[#E5E5E5] pb-[15px] mb-4">
-          <div class="flex">
-            <input class="mr-4" type="checkbox" name="todo2" id="todo2" checked>
-            <label class="grow line-through text-[#9F9A91]" for="todo2">打電話叫媽媽匯款給我</label>
-            <button type="button">
-              <font-awesome-icon icon="fa-solid fa-xmark" fixed-width />
-            </button>
-          </div>
-        </li>
-        <li class="border-b border-[#E5E5E5] pb-[15px] mb-4">
-          <div class="flex">
-            <input class="mr-4" type="checkbox" name="todo1" id="todo1">
-            <label class="grow" for="todo1">把冰箱發霉的檸檬拿去丟</label>
-            <button type="button">
-              <font-awesome-icon icon="fa-solid fa-xmark" fixed-width />
-            </button>
-          </div>
-        </li>
-        <li class="border-b border-[#E5E5E5] pb-[15px] mb-4">
-          <div class="flex">
-            <input class="mr-4" type="checkbox" name="todo2" id="todo2" checked>
-            <label class="grow line-through text-[#9F9A91]" for="todo2">打電話叫媽媽匯款給我</label>
-            <button type="button">
-              <font-awesome-icon icon="fa-solid fa-xmark" fixed-width />
-            </button>
-          </div>
-        </li>
-        <li class="border-b border-[#E5E5E5] pb-[15px] mb-4">
-          <div class="flex">
-            <input class="mr-4" type="checkbox" name="todo1" id="todo1">
-            <label class="grow" for="todo1">把冰箱發霉的檸檬拿去丟</label>
-            <button type="button">
-              <font-awesome-icon icon="fa-solid fa-xmark" fixed-width />
-            </button>
-          </div>
-        </li>
-        <li class="border-b border-[#E5E5E5] pb-[15px] mb-4">
-          <div class="flex">
-            <input class="mr-4" type="checkbox" name="todo2" id="todo2" checked>
-            <label class="grow line-through text-[#9F9A91]" for="todo2">打電話叫媽媽匯款給我</label>
+            <input v-model="todo.status" class="mr-4" type="checkbox" :name="`todo${index}`" :id="`todo${index}`">
+            <input v-model="todo.content" :class="{ 'done': todo.status }" class="grow focus-visible:outline-none" :disabled="todo.status" />
             <button type="button">
               <font-awesome-icon icon="fa-solid fa-xmark" fixed-width />
             </button>
@@ -83,3 +52,9 @@ const updateStatus = (e) => {
     </div>
   </div>
 </template>
+
+<style lang="postcss" scoped>
+.done {
+  @apply line-through text-[#9F9A91] disabled:bg-white
+}
+</style>
