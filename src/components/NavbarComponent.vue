@@ -1,4 +1,5 @@
 <script setup>
+import logoImg from '@/assets/images/logo_lg.png'
 import { defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import { successAlert } from '../utils/sweetalert'
@@ -20,7 +21,7 @@ const logout = () => {
   <nav class="container py-4 px-8 mx-auto">
     <div class="flex justify-between items-center">
       <h1>
-        <router-link to="/" class="block w-[255px] h-[38.45px] bg-[url('src/assets/images/logo_lg.png')] bg-no-repeat bg-center bg-cover indent-[101%] whitespace-nowrap overflow-hidden">ONLINE TODO LIST</router-link>
+        <router-link to="/" :style="{ backgroundImage: `url(${logoImg})` }" class="block w-[255px] h-[38.45px] bg-no-repeat bg-center bg-cover indent-[101%] whitespace-nowrap overflow-hidden">ONLINE TODO LIST</router-link>
       </h1>
       <ul class="flex">
         <li class="hidden md:block font-bold mr-6">{{ `${user.name} 的待辦` }}</li>
